@@ -1,0 +1,29 @@
+{
+  "name": "fsplus",
+  "version": "0.0.0",
+  "description": "a enhancement of file system utils in Node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/turingou/fsplus.git"
+  },
+  "keywords": [
+    "fs",
+    "fsplus",
+    "fs2",
+    "fs3",
+    "file",
+    "filesystem",
+    "utils",
+    "helpers"
+  ],
+  "author": "turing <o.u.turing@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/turingou/fsplus/issues"
+  },
+  "homepage": "https://github.com/turingou/fsplus"
+}
