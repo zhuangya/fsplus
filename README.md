@@ -31,7 +31,15 @@ console.log(newValues.name) // => 'new Name Again'
 ````
 
 ### API
-check this file: `index.js`
+
+fsplus provides all methods of `fs` and above functions:
+
+#### fsplus#readJSON(filename[, callback])
+#### fsplus#readJSONSync(filename)
+#### fsplus#writeJSON(filename, data[, callback])
+#### fsplus#writeJSONSync(filename, data)
+#### fsplus#updateJSON(filename, data[, callback])
+#### fsplus#updateJSONSync(filename, data)
 
 ### Contributing
 - Fork this repo

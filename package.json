@@ -1,6 +1,6 @@
 {
   "name": "fsplus",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "a enhancement of file system utils in Node.js",
   "main": "index.js",
   "scripts": {
@@ -25,5 +25,9 @@
   "bugs": {
     "url": "https://github.com/turingou/fsplus/issues"
   },
-  "homepage": "https://github.com/turingou/fsplus"
+  "homepage": "https://github.com/turingou/fsplus",
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*"
+  }
 }
