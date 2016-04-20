@@ -10,7 +10,7 @@ errors['-1'] = 'object required to update JSON';
 
 exports.readJSON = function(filename, callback) {
   if (!filename) return callback(new Error(errors['404']));
-  if (!callback) return exports.readJSONSync(filename);
+  if (!callback) return this.readJSONSync(filename);
   return fs.readFile(filename, function(err, data) {
     if (err) return callback(err);
     try {
@@ -37,7 +37,7 @@ exports.writeJSON = function(filename, data, callback) {
     if (!callback) throw new Error(errors['404'])
     return callback(new Error(errors['404']));
   }
-  if (!callback) return exports.writeJSONSync(filename, data);
+  if (!callback) return this.writeJSONSync(filename, data);
   var d = data || {};
   try {
     var json = JSON.stringify(d);
@@ -60,12 +60,20 @@ exports.writeJSONSync = function(filename, data) {
 }
 
 exports.updateJSON = function(filename, data, callback) {
-  if (!filename) return callback(new Error(errors['404']));
-  if (!callback) return exports.updateJSONSync(filename, data);
+  if (!filename) {
+    if (!callback) throw new Error(errors['404']);
+    return callback(new Error(errors['404']));
+  }
+  if (!callback) return this.updateJSONSync(filename, data);
   if (!isObject(data)) return callback(new Error(errors['-1']));
   var self = this;
   return this.readJSON(filename, function(err, before) {
-    if (err) return callback(err);
+    if (err) {
+      if (err.code === 'ENOENT') {
+        return this.writeJSON(filename, data, callback);
+      }
+      return callback(err);
+    }
     return self.writeJSON(
       filename,
       !isVaildObject(data) ? {} : mergeObject(before, data),
@@ -77,7 +85,13 @@ exports.updateJSON = function(filename, data, callback) {
 exports.updateJSONSync = function(filename, data) {
   if (!filename) return callback(new Error(errors['404']));
   if (!isObject(data)) return callback(new Error(errors['-1']));
-  var before = this.readJSONSync(filename);
+  try {
+    var before = this.readJSONSync(filename);
+  } catch (err) {
+    //FIXME: better error handling
+    if (err.message === 'filename or filepath required') return this.writeJSONSync(filename, data);
+    throw err;
+  }
   return this.writeJSONSync(
     filename,
     !isVaildObject(data) ? {} : mergeObject(before, data)

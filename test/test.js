@@ -66,3 +66,9 @@ test('updateJSON should update JSON instead of overwrite', t => {
     age: 24
   })
 })
+
+test('updateJSON should create file if target is non-existed', t => {
+  t.deepEqual(fsp.updateJSON(path.join(fixturesPath, 'boo.json'), { name: 'boo' }), {
+    name: 'boo'
+  })
+})
