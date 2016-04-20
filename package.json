@@ -1,17 +1,18 @@
 {
   "name": "fsplus",
   "version": "0.1.0",
-  "description": "a enhancement of file system utils in Node.js",
+  "description": "an enhancement of file system utils in Node.js",
   "main": "index.js",
   "bin": "bin/cli",
   "scripts": {
     "test-cli": "bin/cli examples/configs.json",
     "test-cli-by-key": "bin/cli examples/configs.json -k cache",
-    "test-cli-by-nullkey": "bin/cli examples/configs.json -k nothisKey"
+    "test-cli-by-nullkey": "bin/cli examples/configs.json -k nothisKey",
+    "test": "ava"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/turingou/fsplus.git"
+    "url": "git://github.com/guo-yu/fsplus.git"
   },
   "keywords": [
     "fs",
@@ -26,11 +27,13 @@
   "author": "turing <o.u.turing@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/turingou/fsplus/issues"
+    "url": "https://github.com/guo-yu/fsplus/issues"
   },
-  "homepage": "https://github.com/turingou/fsplus",
+  "homepage": "https://github.com/guo-yu/fsplus",
   "devDependencies": {
-    "mocha": "*",
-    "should": "*"
+    "ava": "~0.14.0"
+  },
+  "engines": {
+    "node": ">=0.10"
   }
 }
