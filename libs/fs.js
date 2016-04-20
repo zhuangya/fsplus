@@ -27,12 +27,16 @@ exports.readJSONSync = function(filename) {
     var data = fs.readFileSync(filename);
     return JSON.parse(data);
   } catch (err) {
+    if (err.code === 'ENOENT') throw new Error(errors['404'])
     throw err;
   }
 }
 
 exports.writeJSON = function(filename, data, callback) {
-  if (!filename) return callback(new Error(errors['404']));
+  if (!filename) {
+    if (!callback) throw new Error(errors['404'])
+    return callback(new Error(errors['404']));
+  }
   if (!callback) return exports.writeJSONSync(filename, data);
   var d = data || {};
   try {
@@ -63,7 +67,7 @@ exports.updateJSON = function(filename, data, callback) {
   return this.readJSON(filename, function(err, before) {
     if (err) return callback(err);
     return self.writeJSON(
-      filename, 
+      filename,
       !isVaildObject(data) ? {} : mergeObject(before, data),
       callback
     );
@@ -75,7 +79,7 @@ exports.updateJSONSync = function(filename, data) {
   if (!isObject(data)) return callback(new Error(errors['-1']));
   var before = this.readJSONSync(filename);
   return this.writeJSONSync(
-    filename, 
+    filename,
     !isVaildObject(data) ? {} : mergeObject(before, data)
   );
 }

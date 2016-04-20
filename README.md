@@ -1,6 +1,6 @@
-## fsplus ![npm](https://badge.fury.io/js/fsplus.png)
+## fsplus ![npm](https://badge.fury.io/js/fsplus.png)![travis](https://img.shields.io/travis/guo-yu/fsplus.svg?style=plastic)
 
-a enhancement of file system utils in Node.js.
+an enhancement of file system utils in Node.js.
 
 ### Installation
 ````
