@@ -8,7 +8,8 @@
     "test-cli": "bin/cli examples/configs.json",
     "test-cli-by-key": "bin/cli examples/configs.json -k cache",
     "test-cli-by-nullkey": "bin/cli examples/configs.json -k nothisKey",
-    "test": "ava"
+    "test": "ava",
+    "dev": "npm test -- --watch"
   },
   "repository": {
     "type": "git",
@@ -35,5 +36,10 @@
   },
   "engines": {
     "node": ">=0.10"
+  },
+  "ava": {
+    "source": [
+      "!test/fixtures/**/*"
+    ]
   }
 }
